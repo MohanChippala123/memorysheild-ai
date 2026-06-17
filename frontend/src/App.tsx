@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Layout from './components/layout/Layout'
-import Dashboard from './pages/Dashboard'
+import LuxuryLayout from './components/layout/LuxuryLayout'
+import LuxuryDashboard from './pages/LuxuryDashboard'
 import SecurityVault from './pages/SecurityVault'
 import IncidentExplorer from './pages/IncidentExplorer'
 import ThreatFamilies from './pages/ThreatFamilies'
@@ -11,16 +11,16 @@ import './App.css'
 function App() {
   return (
     <Router>
-      <Layout>
+      <LuxuryLayout>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<LuxuryDashboard />} />
           <Route path="/vault" element={<SecurityVault />} />
           <Route path="/incidents/:id" element={<IncidentExplorer />} />
           <Route path="/threats" element={<ThreatFamilies />} />
           <Route path="/agents/:id" element={<AgentProfile />} />
           <Route path="/analyst" element={<SecurityAnalyst />} />
         </Routes>
-      </Layout>
+      </LuxuryLayout>
     </Router>
   )
 }
