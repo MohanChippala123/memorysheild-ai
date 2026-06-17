@@ -8,15 +8,6 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11
-      - key: DATABASE_URL
-        fromDatabase:
-          name: memoryshield-db
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          name: memoryshield-redis
-          type: pserv
-          property: connectionString
       - key: DEBUG
         value: "false"
       - key: ENVIRONMENT
@@ -27,21 +18,21 @@ services:
         sync: false
       - key: ANTHROPIC_API_KEY
         sync: false
+    depends_on:
+      - memoryshield-db
+      - memoryshield-redis
 
   - type: web
     name: memoryshield-frontend
     env: node
-    buildCommand: "cd frontend && npm install && npm run build"
-    startCommand: "cd frontend && npm install -g serve && serve -s dist -l 3000"
+    buildCommand: "cd frontend && npm install --legacy-peer-deps && npm run build"
+    startCommand: "cd frontend && npm install -g serve && serve -s dist -l $PORT"
     plan: free
     envVars:
       - key: VITE_API_URL
         value: "https://memoryshield-backend.onrender.com/api/v1"
       - key: NODE_ENV
         value: "production"
-    routes:
-      - path: /
-        destination: /index.html
 
   - type: pserv
     name: memoryshield-redis
