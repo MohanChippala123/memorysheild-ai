@@ -17,8 +17,6 @@ services:
         generateValue: true
       - key: OPENAI_API_KEY
         sync: false
-      - key: ANTHROPIC_API_KEY
-        sync: false
       - key: REDIS_URL
         value: ""
       - key: DATABASE_URL
