@@ -15,9 +15,10 @@ class Settings(BaseSettings):
     # ========================================================================
     APP_NAME: str = "MemoryShield AI"
     APP_VERSION: str = "1.0.0"
-    DEBUG: bool = os.getenv("DEBUG", "False") == "True"
+    DEBUG: bool = os.getenv("DEBUG", "False").lower() in ("true", "1", "yes")
     HOST: str = os.getenv("HOST", "0.0.0.0")
     PORT: int = int(os.getenv("PORT", "8000"))
+    ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
 
     # ========================================================================
     # Database
